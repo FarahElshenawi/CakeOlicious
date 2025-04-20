@@ -1,0 +1,7 @@
+# Python
+backend/venv/
+__pycache__/
+*.pyc
+
+# Flask environment
+backend/.env
