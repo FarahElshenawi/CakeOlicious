@@ -11,7 +11,6 @@ Cakeolicious is a sweet and delightful e-commerce web application for ordering c
 - 🧁 Order summary and confirmation
 - 🧁 Admin dashboard to manage cakes, orders, and users
 - 🤖 **AI Chatbot** to assist users with questions and product help
-- 🎯 **Recommendation System** to suggest cakes based on user preferences or purchase history
 
 ## 🛠️ Tech Stack
 
@@ -20,5 +19,4 @@ Cakeolicious is a sweet and delightful e-commerce web application for ordering c
 - **Database:** SQL Server
 - **AI Tools:** 
   - NLP model for chatbot 
-  - Collaborative or content-based filtering for recommendations
-- **Architecture:** Monolithic Web Application
+=- **Architecture:** Monolithic Web Application
