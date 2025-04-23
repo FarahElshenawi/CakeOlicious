@@ -1,7 +1,5 @@
-# Python
+venv/
 backend/venv/
-__pycache__/
 *.pyc
-
-# Flask environment
-backend/.env
+__pycache__/
+some/remote/ignore/pattern
