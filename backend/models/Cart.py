@@ -10,4 +10,3 @@ class Cart(db.Model):
     added_date = db.Column(db.DateTime)
     discount = db.Column(db.Float, default=0.0)
     
- #   product = db.relationship('Product', backref=db.backref('in_cart', lazy=True))
