@@ -3,3 +3,4 @@ backend/venv/
 *.pyc
 __pycache__/
 some/remote/ignore/pattern
+.env

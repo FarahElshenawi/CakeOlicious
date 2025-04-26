@@ -1,6 +1,10 @@
 USE Sweets_Store;
 GO
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 134506e (Add models)
 DROP PROCEDURE IF EXISTS add_customer;
 DROP PROCEDURE IF EXISTS AddNewProduct;
 DROP PROCEDURE IF EXISTS AddProductDiscount;
@@ -338,4 +342,8 @@ BEGIN
         SELECT ERROR_MESSAGE() AS ErrorMessage;
     END CATCH
 END;
+<<<<<<< HEAD
 GO
+=======
+GO
+>>>>>>> 134506e (Add models)
