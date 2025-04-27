@@ -1,10 +1,8 @@
-# app/models/__init__.py
-from .User import User
-from .Product import Product
-from .Category import Category
-from .Cart import Cart
-from .Order import Order
-from .OrderDetail import OrderDetail
-from .ProductReview import ProductReview
-from .Payment import Payment
-#from app.models import User, Product, Order, Category, Payment, OrderDetail
+from .user import User
+from .product import Product
+from .category import Category
+from .cart import Cart
+from .order import Order
+from .order_detail import OrderDetail
+from .product_review import ProductReview
+from .payment import Payment
