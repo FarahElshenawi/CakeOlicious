@@ -1,8 +1,8 @@
  
 # app/routes/auth.py
 from flask import Blueprint,render_template, request, jsonify
-from app.extensions import db
-from app.models.User import User
+from backend.extensions import db
+from backend.models.User import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth_bp = Blueprint('auth', __name__)
