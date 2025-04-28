@@ -10,28 +10,24 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 def create_app():
-    # إنشاء التطبيق
     app = Flask(__name__)
-    app.config.from_object(Config)  # بدلاً من 'backend.config.config.Config'
+    app.config.from_object(Config)  
     print(f"SQLALCHEMY_DATABASE_URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
     app.logger.setLevel(logging.DEBUG)
-    # تهيئة الـ database والمهاجرات
+   
     migrate = Migrate(app, db)
     db.init_app(app)
     migrate.init_app(app, db)
 
-    # تسجيل الـ blueprint الخاص بالمصادقة
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
 
-    # طباعة جميع الـ routes المسجلة
     with app.app_context():
         print(current_app.url_map)
     
-    # التحقق من الاتصال بقاعدة البيانات
     @app.before_first_request
     def check_db_connection():
         try:
-            db.engine.connect()  # اختبار الاتصال
+            db.engine.connect()  
             print("Database connection successful.")
         except Exception as e:
             print("Database connection error:", e)
@@ -39,5 +35,5 @@ def create_app():
     return app
 
 if __name__ == '__main__':
-    app = create_app()  # إنشاء التطبيق
-    app.run(debug=True)  # تشغيل السيرفر
+    app = create_app()  
+    app.run(debug=True)  

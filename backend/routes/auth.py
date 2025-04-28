@@ -19,17 +19,16 @@ def signup():
     username = data.get('username')
     password = data.get('pass_word')
     email = data.get('email')
-    full_name = data.get('full_name')  # إضافة full_name
-    user_address = data.get('user_address')  # إضافة user_address
-    phone_number = data.get('phone_number')  # إضافة phone_number
+    full_name = data.get('full_name') 
+    user_address = data.get('user_address') 
+    phone_number = data.get('phone_number') 
     user_role = data.get('user_role')
     print(f"Received data: {data}")
     if not username or not password or not email:
             return jsonify({'message': 'Missing required fields'}), 400
-    # التأكد من أن العمود في قاعدة البيانات هو 'username' وليس 'userName'
-    if User.query.filter_by(username=username).first():  # تعديل هنا
+    if User.query.filter_by(username=username).first():  
             return jsonify({'message': 'Username already exists'}), 400
-    if user_role not in ['Customer', 'admin']:  # التحقق هنا
+    if user_role not in ['Customer', 'admin']:  
         return jsonify({'message': 'Invalid role value'}), 400
     hashed_password = generate_password_hash(password)
 
@@ -37,9 +36,9 @@ def signup():
             username=username,
             pass_word=hashed_password,
             email=email,
-            full_name=full_name,  # إضافة full_name
-            user_address=user_address,  # إضافة user_address
-            phone_number=phone_number,  # إضافة phone_number
+            full_name=full_name,  
+            user_address=user_address,  
+            phone_number=phone_number, 
             user_role=user_role 
             
 
