@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-family: var(--font-primary);
+}
+
+.logo {
+  color: var(--primary-color);
+  img {
+    right: 63.5%;
+    bottom: -32px;
+  }
+}

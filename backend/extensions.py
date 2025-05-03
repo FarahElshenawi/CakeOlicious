@@ -7,12 +7,14 @@
 # migrate = Migrate()
 # extensions.py
 import pyodbc
+from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
-from config.config import Config
+from backend.config.config import Config
+
+db = SQLAlchemy()
+jwt = JWTManager()
+
 
 # دالة الاتصال بقاعدة البيانات
 def get_db_connection():
-    return pyodbc.connect(Config.SQL_CONNECTION_STRING)
-
-# تهيئة JWT
-jwt = JWTManager()
+    return db
