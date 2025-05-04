@@ -10,5 +10,6 @@ from .order_detail import OrderDetail
 from .payment import Payment
 from .product_review import ProductReview
 
+
 # models/__init__.py
 # ملف فارغ

@@ -16,6 +16,12 @@ jwt = JWTManager()
 
 def create_app():
     app = Flask(__name__)
+
+    from backend.models import db
+    db.init_app(app)
+    for rule in app.url_map.iter_rules():
+        print(rule)
+    jwt.init_app(app)
     return app
 
 

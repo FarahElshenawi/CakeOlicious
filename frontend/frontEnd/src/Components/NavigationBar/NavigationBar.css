@@ -40,7 +40,7 @@ h2 {
   top: -20px;
 }
 
-/* Search bar styles */
+
 .search-container {
   position: relative;
   display: flex;
@@ -156,7 +156,7 @@ h2 {
   padding: 0.5rem 0;
   position: relative;
   font-family: var(--font-primary);
-  font-size: 1.1rem;
+  font-size: 1.25rem;
 }
 
 .nav-links .nav-link::after {

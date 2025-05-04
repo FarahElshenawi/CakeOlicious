@@ -8,7 +8,7 @@ const NavigationBar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            const topNavHeight = 80; // Height of the top navbar
+            const topNavHeight = 80;
             if (window.scrollY > topNavHeight) {
                 setIsSticky(true);
             } else {
@@ -24,7 +24,7 @@ const NavigationBar = () => {
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light position-relative">
                 <div className="container position-relative p-3">
-                    {/* Brand in the center */}
+                    
                     <div className="navbar-brand position-absolute start-50 translate-middle-x" href="#">
                         <a href="#hh" className="text-decoration-none">
                             <span href="#" className='cursor-pointer'>
@@ -34,7 +34,7 @@ const NavigationBar = () => {
                         </a>
                     </div>
 
-                    {/* Toggler for mobile */}
+                    
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -47,11 +47,11 @@ const NavigationBar = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
-                    {/* Collapsible content */}
+                    
                     <div className="collapse navbar-collapse w-100" id="navbarContent">
                         <div className="d-flex justify-content-between w-100 flex-column flex-lg-row align-items-center gap-3 mt-3 mt-lg-0">
 
-                            {/* Left: Search */}
+                            
                             <form className="d-flex search-form" role="search">
                                 <div className="search-container">
                                     <FaSearch className="search-icon" />
@@ -64,7 +64,7 @@ const NavigationBar = () => {
                                 </div>
                             </form>
 
-                            {/* Right: Icons */}
+                            
                             <div className="d-flex align-items-center gap-4">
                                 <a href="#" className="nav-link d-flex flex-column align-items-center">
                                     <FaUser size={20} />
