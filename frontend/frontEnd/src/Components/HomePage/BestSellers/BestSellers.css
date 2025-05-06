@@ -1,37 +1,58 @@
 .slick-slide img {
   width: 100%;
-  height: 200px; /* Fixed height for images */
-  object-fit: cover; /* Ensures images scale without distortion */
+  height: 200px;
+  object-fit: cover;
 }
+
 .slick-dots li button:before {
   color: white;
+  margin-top: 10px;
 }
-.slick-prev:before, .slick-next:before {
+.slick-prev:before,
+.slick-next:before {
   color: black;
 }
+button.slick-arrow.slick-prev::before,
+button.slick-arrow.slick-next::before {
+  color: rgb(57, 39, 15);
+}
 .carousel-card {
-  margin: 0 15px; /* Increased margin for more spacing between cards */
+  margin: 0 15px;
 }
 .card {
-  height: 300px; /* Fixed height for all cards */
+  height: 300px;
   display: flex;
-  flex-direction: column; /* Stack image and body vertically */
+  flex-direction: column;
   margin: 0 15px;
 }
 .card-img-top {
-  height: 200px; /* Match slick-slide img height */
+  height: 200px;
   object-fit: cover;
 }
 .card-body {
-  flex: 1; /* Allow card-body to take remaining space */
+  flex: 1;
   display: flex;
-  align-items: center; /* Center title vertically */
-  justify-content: center; /* Center title horizontally */
-  overflow: hidden; /* Prevent overflow of long titles */
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 .card-title {
-  margin: 0; /* Remove default margin for consistent spacing */
+  margin: 0;
 }
 .slick-list {
-  padding: 0 10px; /* Add padding to prevent clipping of cards */
+  padding: 0 10px;
+}
+.text-dark {
+  color: #4a2c2a !important;
+}
+p {
+  font-family: var(--font-secondary);
+  color: #d4a017; /* Loved by Sweet Tooths Everywhere */
+  width: 517px;
+  height: 54px;
+  left: calc(50% - 517px / 2 - 0.5px);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 39.9262px;
+  line-height: 54px;
 }

@@ -29,3 +29,7 @@
 .text-bold {
   font-weight: var(--font-bold);
 }
+::selection {
+  background-color: #f8f3d9;
+  color: #504b38;
+}

@@ -3,7 +3,6 @@ import './BestSellers.css';
 import { IMAGES } from '../../../assets/assets';
 import Slider from 'react-slick';
 
-
 const BestSellers = () => {
     const bestSellers = [
         { id: 1, name: 'Product 1', image: IMAGES.cake },
@@ -31,8 +30,12 @@ const BestSellers = () => {
     };
 
     return (
-        <div className="container bg-danger py-4">
-            <h2 className="text-white text-center mb-4">Best Sellers</h2>
+        <div className="container py-4">
+            <div className="d-flex flex-column align-items-center">
+                <h2 className="text-dark text-center mb-4">Best Sellers</h2>
+                <p>Loved by Sweet Tooths Everywhere</p>
+            </div>
+
             <div className="px-3">
                 <Slider {...settings}>
                     {bestSellers.map((item) => (
