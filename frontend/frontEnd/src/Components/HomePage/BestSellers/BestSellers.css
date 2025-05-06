@@ -1,0 +1,37 @@
+.slick-slide img {
+  width: 100%;
+  height: 200px; /* Fixed height for images */
+  object-fit: cover; /* Ensures images scale without distortion */
+}
+.slick-dots li button:before {
+  color: white;
+}
+.slick-prev:before, .slick-next:before {
+  color: black;
+}
+.carousel-card {
+  margin: 0 15px; /* Increased margin for more spacing between cards */
+}
+.card {
+  height: 300px; /* Fixed height for all cards */
+  display: flex;
+  flex-direction: column; /* Stack image and body vertically */
+  margin: 0 15px;
+}
+.card-img-top {
+  height: 200px; /* Match slick-slide img height */
+  object-fit: cover;
+}
+.card-body {
+  flex: 1; /* Allow card-body to take remaining space */
+  display: flex;
+  align-items: center; /* Center title vertically */
+  justify-content: center; /* Center title horizontally */
+  overflow: hidden; /* Prevent overflow of long titles */
+}
+.card-title {
+  margin: 0; /* Remove default margin for consistent spacing */
+}
+.slick-list {
+  padding: 0 10px; /* Add padding to prevent clipping of cards */
+}
