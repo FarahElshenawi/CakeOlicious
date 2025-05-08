@@ -1,10 +1,10 @@
-from app.extensions import db
+from backend.extensions import db
 
 class Category(db.Model):
-    __tablename__ = 'category'
+    __tablename__ = 'categories'
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    category_name = db.Column(db.String(50), nullable=False)
+    category_description = db.Column(db.Text)
 
-    categoryID = db.Column(db.Integer, primary_key=True)
-    categoryName = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text)
-
-    products = db.relationship('Product', backref='category', lazy=True)
+    

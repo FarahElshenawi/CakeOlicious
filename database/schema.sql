@@ -32,18 +32,27 @@ CREATE TABLE products (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
--- Cart table for cart items
+-- Cart table for cart 
 CREATE TABLE Cart (
     id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT NOT NULL,
+    created_at DATETIME DEFAULT GETDATE(),
+    is_checked_out BIT DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- Cart table for cart_details 
+CREATE TABLE cart_details (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    cart_id INT NOT NULL,
     product_id INT NOT NULL,
     quantity INT NOT NULL CHECK (quantity > 0),
-    price DECIMAL(10, 2) NOT NULL,
-    discount DECIMAL(5, 2) DEFAULT 0,
-    added_date DATETIMEOFFSET DEFAULT GETDATE(),
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    price DECIMAL(10,2) NOT NULL,
+    discount DECIMAL(5,2) DEFAULT 0,
+    added_date DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (cart_id) REFERENCES cart(id),
     FOREIGN KEY (product_id) REFERENCES products(id),
-    CONSTRAINT UQ_User_Product UNIQUE (user_id, product_id)
+    CONSTRAINT UQ_Cart_Product UNIQUE (cart_id, product_id)
 );
 
 -- Orders table for checkout
@@ -52,6 +61,7 @@ CREATE TABLE orders (
     user_id INT,
     order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     total_amount DECIMAL(10, 2) NOT NULL,
+    shipping_address VARCHAR(255) NOT NULL,
     status VARCHAR(20) CHECK (status IN ('Pending', 'Shipped', 'Delivered')) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -63,6 +73,7 @@ CREATE TABLE order_details (
     product_id INT,
     quantity INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
+    discount DECIMAL(5,2) DEFAULT 0,
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );

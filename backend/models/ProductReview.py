@@ -1,13 +1,22 @@
-from app.extensions import db
+from backend.extensions import db
+from datetime import datetime
 
 class ProductReview(db.Model):
-    __tablename__ = 'product_review'
-
-    productID = db.Column(db.Integer, db.ForeignKey('products.productID'), primary_key=True)
-    userID = db.Column(db.Integer, db.ForeignKey('users.userID'), primary_key=True)
-    review_date = db.Column(db.DateTime)
-    rating = db.Column(db.Integer)
-    reviewText = db.Column(db.Text)
+    __tablename__ = 'product_reviews'
     
-    product = db.relationship('Product', backref='product_reviews', lazy=True)  # تم تعديل backref هنا
-    # تم حذف user العلاقة بسبب تعارض الـ backref في ProductReview
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    rating = db.Column(db.Integer)
+    review_text = db.Column(db.Text)
+    review_date = db.Column(db.DateTime, default=datetime.utcnow)
+    
+   # CHECK constraint for rating
+    __table_args__ = (
+        db.CheckConstraint('rating >= 1 AND rating <= 5', name='check_rating'),
+    )
+    
+    # Relationships
+    product = db.relationship('Product', backref='reviews')
+
+    

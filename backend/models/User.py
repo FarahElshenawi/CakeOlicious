@@ -1,25 +1,38 @@
-from app.extensions import db
+from backend.extensions import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
-
-    userID = db.Column(db.Integer, primary_key=True)
-    userName = db.Column(db.String(50), nullable=False, unique=True)
-    passWord = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(100), unique=True)
-    fullName = db.Column(db.String(100))
-    address = db.Column(db.String(255))
-    phoneNum = db.Column(db.String(20))
-    role = db.Column(db.String(20))  # Admin or Customer, مثلاً
-
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(100), unique=True, nullable=False)
+    pass_word = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), unique=True, nullable=False)
+    full_name = db.Column(db.String(100), nullable=False)
+    user_address = db.Column(db.Text)
+    phone_number = db.Column(db.String(20))
+    user_role = db.Column(db.String(20), nullable=False)
+    
+    # CHECK constraint for user_role
+    __table_args__ = (
+        db.CheckConstraint("user_role IN ('Admin', 'Customer')", name='check_user_role'),
+    )
+    
+    # Relationships
     orders = db.relationship('Order', backref='user', lazy=True)
     reviews = db.relationship('ProductReview', backref='reviewer', lazy=True)
-    cart_items = db.relationship('Cart', backref='user', lazy=True)
-
+    
+    # Functions to encrypt password
     def set_password(self, password):
-        self.passWord = generate_password_hash(password)
-
+        self.pass_word = generate_password_hash(password)
+    
     def check_password(self, password):
-        return check_password_hash(self.passWord, password)
-
+        return check_password_hash(self.pass_word, password)
+    
+    # Function to check if the user is an admin
+    @property
+    def is_admin(self):
+        return self.user_role == 'Admin'
+    
+    

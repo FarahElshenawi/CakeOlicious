@@ -1,15 +1,16 @@
-from app.extensions import db
+from backend.extensions import db
 
 class OrderDetail(db.Model):
-    __tablename__ = 'order_detail'
-
-    orderDetailID = db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'order_details'
     
-    orderID = db.Column(db.Integer, db.ForeignKey('orders.orderID'), nullable=False)
-    productID = db.Column(db.Integer, db.ForeignKey('products.productID'), nullable=False)
-    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    unit_price = db.Column(db.Float, nullable=False)
-
-    order = db.relationship('Order', backref=db.backref('order_details', lazy=True))
-    product = db.relationship('Product', backref=db.backref('order_details', lazy=True))
+    price = db.Column(db.Numeric(10, 2), nullable=False)
+    discount = db.Column(db.Numeric(5, 2), nullable=True)
+    
+    # Relationships
+    # order = db.relationship('Order', backref='order_details')
+    product = db.relationship('Product', backref='order_details')
+    

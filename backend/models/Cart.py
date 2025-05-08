@@ -1,12 +1,14 @@
-from app.extensions import db
+from backend.extensions import db
+from datetime import datetime
 
 class Cart(db.Model):
     __tablename__ = 'cart'
-
-    userID = db.Column(db.Integer, db.ForeignKey('users.userID'), primary_key=True)
-    productID = db.Column(db.Integer, db.ForeignKey('products.productID'), primary_key=True)
-    quantity = db.Column(db.Integer, nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    added_date = db.Column(db.DateTime)
-    discount = db.Column(db.Float, default=0.0)
     
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_date = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
+    is_checked_out = db.Column(db.Boolean, default=False)
+
+    # Relationships
+    user = db.relationship('User', backref='carts', lazy=True)
+    cart_details = db.relationship('CartDetails', backref='cart', lazy=True)
