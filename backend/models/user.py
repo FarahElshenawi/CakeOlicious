@@ -1,60 +1,38 @@
-# from flask_sqlalchemy import SQLAlchemy
-
-# db = SQLAlchemy()
-
-# class User(db.Model):
-#     __tablename__ = 'users'
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     username = db.Column(db.String(100), unique=True, nullable=False)
-#     pass_word = db.Column(db.String(255), nullable=False)
-#     email = db.Column(db.String(255), unique=True, nullable=False)
-#     full_name = db.Column(db.String(100), nullable=False)
-#     user_address = db.Column(db.Text)
-#     phone_number = db.Column(db.String(20))
-#     user_role = db.Column(db.String(20), nullable=False)
-# models/user.py
 from backend.extensions import db
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
-
-class User(db.Model):
-    __tablename__ = "users"
-
-    id = db.Column(db.Integer, primary_key=True)
+class User(db.Model, UserMixin):
+    __tablename__ = 'users'
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=False)
+    pass_word = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
     full_name = db.Column(db.String(100), nullable=False)
-    address = db.Column(db.Text)
+    user_address = db.Column(db.Text)
     phone_number = db.Column(db.String(20))
-    role = db.Column(db.String(20), nullable=False, default="user")
-
-    @staticmethod
-    def add_user(username, password, email, full_name, address=None, phone_number=None):
-        user = User(
-            username=username,
-            password=password,
-            email=email,
-            full_name=full_name,
-            address=address,
-            phone_number=phone_number,
-        )
-        db.session.add(user)
-        db.session.commit()
-        return {"message": "User created successfully"}
-
-    @staticmethod
-    def get_user_by_username(username):
-        user = User.query.filter_by(username=username).first()
-        if user:
-            return {
-                "id": user.id,
-                "username": user.username,
-                "password": user.password,
-                "email": user.email,
-                "full_name": user.full_name,
-                "address": user.address,
-                "phone_number": user.phone_number,
-                "role": user.role,
-            }
-        return None
+    user_role = db.Column(db.String(20), nullable=False)
+    
+    # CHECK constraint for user_role
+    __table_args__ = (
+        db.CheckConstraint("user_role IN ('Admin', 'Customer')", name='check_user_role'),
+    )
+    
+    # Relationships
+    orders = db.relationship('Order', backref='user', lazy=True)
+    reviews = db.relationship('ProductReview', backref='reviewer', lazy=True)
+    
+    # Functions to encrypt password
+    def set_password(self, password):
+        self.pass_word = generate_password_hash(password)
+    
+    def check_password(self, password):
+        return check_password_hash(self.pass_word, password)
+    
+    # Function to check if the user is an admin
+    @property
+    def is_admin(self):
+        return self.user_role == 'Admin'
+    
+    
